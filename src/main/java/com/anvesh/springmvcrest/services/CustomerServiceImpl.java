@@ -2,6 +2,7 @@ package com.anvesh.springmvcrest.services;
 
 import com.anvesh.springmvcrest.api.v1.mapper.CustomerMapper;
 import com.anvesh.springmvcrest.api.v1.model.CustomerDTO;
+import com.anvesh.springmvcrest.domain.Customer;
 import com.anvesh.springmvcrest.repositories.CustomerRespository;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,18 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO findById(Long id) {
         return mapper.customerToCustomerDto(customerRespository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer Not Found")));
+    }
+
+    /*
+     * getting customer from user(no id)
+     * converting into customer dto and saving it to db(id generated
+     * converting it to customerdto and adding url*/
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = mapper.customerDtoToCustomer(customerDTO);
+        Customer savedCustomer = customerRespository.save(customer);
+        CustomerDTO savedDto = mapper.customerToCustomerDto(savedCustomer);
+        savedDto.setCustomer_url("/api/v1/customers/" + savedCustomer.getId());
+        return savedDto;
     }
 }

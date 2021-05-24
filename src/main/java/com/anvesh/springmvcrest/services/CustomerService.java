@@ -8,4 +8,6 @@ public interface CustomerService {
     List<CustomerDTO> findAll();
 
     CustomerDTO findById(Long Id);
+
+    CustomerDTO createNewCustomer(CustomerDTO customerDTO);
 }
