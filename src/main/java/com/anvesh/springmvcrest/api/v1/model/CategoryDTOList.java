@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CategoryDTOList {
-    List<CategoryDTO> categoryDTOS;
+    List<CategoryDTO> categoryDTOs;
 }
