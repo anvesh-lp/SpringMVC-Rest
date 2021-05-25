@@ -38,4 +38,10 @@ public class CustomerController {
         return new ResponseEntity<>(customeRepo.updateCustomer(id, customerDTO), HttpStatus.CREATED);
     }
 
+    @DeleteMapping({"{id}"})
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        customeRepo.deleteCustomer(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

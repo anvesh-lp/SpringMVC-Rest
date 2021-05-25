@@ -9,4 +9,5 @@ public interface CategoryService {
     List<CategoryDTO> findall();
 
     CategoryDTO findByName(String name);
+
 }

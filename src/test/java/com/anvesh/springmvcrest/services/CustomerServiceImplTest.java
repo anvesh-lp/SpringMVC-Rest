@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
@@ -86,5 +86,11 @@ class CustomerServiceImplTest {
         assertEquals("anvesh", dto.getFirstname());
         assertEquals("/api/v1/customers/1", dto.getCustomer_url());
 
+    }
+
+    @Test
+    void deleteCustomer() {
+        customerService.deleteCustomer(anyLong());
+        verify(customerRespository, times(1)).deleteById(anyLong());
     }
 }

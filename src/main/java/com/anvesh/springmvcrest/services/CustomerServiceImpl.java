@@ -58,6 +58,11 @@ public class CustomerServiceImpl implements CustomerService {
         return savedandreturn(customer);
     }
 
+    @Override
+    public void deleteCustomer(Long id) {
+        customerRespository.deleteById(id);
+    }
+
     //to save adn return the customer
     private CustomerDTO savedandreturn(Customer customer) {
         Customer savedCusomter = customerRespository.save(customer);
