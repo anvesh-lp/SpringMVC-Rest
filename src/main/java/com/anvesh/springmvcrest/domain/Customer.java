@@ -21,7 +21,7 @@ public class Customer {
     private String lastname;
     private String customer_url;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 

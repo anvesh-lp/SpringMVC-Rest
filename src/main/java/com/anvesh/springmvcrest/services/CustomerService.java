@@ -10,4 +10,6 @@ public interface CustomerService {
     CustomerDTO findById(Long Id);
 
     CustomerDTO createNewCustomer(CustomerDTO customerDTO);
+
+    CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO);
 }

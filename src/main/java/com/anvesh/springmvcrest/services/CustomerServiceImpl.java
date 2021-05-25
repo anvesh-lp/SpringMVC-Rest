@@ -34,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public CustomerDTO findById(Long id) {
+        System.out.println(customerRespository.findById(id));
         return mapper.customerToCustomerDto(customerRespository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer Not Found")));
     }
@@ -41,13 +42,28 @@ public class CustomerServiceImpl implements CustomerService {
     /*
      * getting customer from user(no id)
      * converting into customer dto and saving it to db(id generated
-     * converting it to customerdto and adding url*/
+     * converting it to customerdto and adding url
+     */
     @Override
     public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
         Customer customer = mapper.customerDtoToCustomer(customerDTO);
-        Customer savedCustomer = customerRespository.save(customer);
-        CustomerDTO savedDto = mapper.customerToCustomerDto(savedCustomer);
-        savedDto.setCustomer_url("/api/v1/customers/" + savedCustomer.getId());
+        return savedandreturn(customer);
+    }
+
+
+    @Override
+    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
+        Customer customer = mapper.customerDtoToCustomer(customerDTO);
+        customer.setId(id);
+        return savedandreturn(customer);
+    }
+
+    //to save adn return the customer
+    private CustomerDTO savedandreturn(Customer customer) {
+        Customer savedCusomter = customerRespository.save(customer);
+        CustomerDTO savedDto = mapper.customerToCustomerDto(savedCusomter);
+        savedDto.setCustomer_url("/api/v1/customers/" + savedCusomter.getId());
         return savedDto;
     }
+
 }
